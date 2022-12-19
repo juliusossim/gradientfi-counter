@@ -7,8 +7,9 @@ const useCounter = () => {
   const [val, setVal] = useState(1); // val state, to increase/decrease with/without input
   const paraCap = (string) => string.charAt(0).toUpperCase() + string.slice(1); // paragraph case
   const increaseCount = () => setCount((prev) => (!isNaN(val) ? prev + val : prev + 1));
-  const decreaseCount = () => setCount((prev) => (!isNaN(val) ? prev - val : prev - 1)); // decrease if not zero
+  const decreaseCount = () => setCount((prev) => (!isNaN(val) ? prev - val : prev - 1)); // decrease
+  const clear = () => setVal(1); // resets val
 
-  return { paraCap, decreaseCount, increaseCount, count, setVal, user }; // expose
+  return { paraCap, decreaseCount, increaseCount, count, setVal, user, clear }; // expose
 };
 export default useCounter;

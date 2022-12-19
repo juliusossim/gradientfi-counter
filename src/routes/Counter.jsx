@@ -12,7 +12,7 @@ import {
 import useCounter from '../hooks/useCounter';
 
 const Counter = () => {
-  const { paraCap, decreaseCount, increaseCount, count, setVal, user } = useCounter(); // custom hook
+  const { paraCap, decreaseCount, increaseCount, count, setVal, clear, user } = useCounter(); // custom hook
 
   return (
     <StyledLayout>
@@ -27,13 +27,18 @@ const Counter = () => {
         onSubmit={(e) => {
           e.preventDefault();
         }}>
-        <StyledInput
-          onChange={(e) => setVal(parseInt(e.target.value, 10))}
-          type="number"
-          name="val"
-          width="25vw"
-          placeholder="enter amount to operate"
-        />
+        <FlexBox>
+          <StyledInput
+            onChange={(e) => setVal(parseInt(e.target.value, 10))}
+            type="number"
+            name="val"
+            width="25vw"
+            placeholder="enter amount to operate"
+          />
+          <StyledButton type="reset" onClick={clear}>
+            Clear
+          </StyledButton>
+        </FlexBox>
         <FlexBox>
           {' '}
           <StyledButton width={count > 0 ? '' : '25.5vw'} onClick={increaseCount}>
