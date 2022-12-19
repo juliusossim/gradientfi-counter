@@ -1,22 +1,19 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutlet } from 'react-router-dom';
 import { useMemo, createContext } from 'react';
 import useLocalforage from '../hooks/useLocalforage';
 
-export const AuthContext = createContext({
-  user: null,
-  login: () => Promise.resolve(),
-  logout: () => Promise.resolve()
-});
+export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useLocalforage('user', null);
 
-  const login = async (user) => {
-    const { email } = user;
+  const login = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
     const name = email?.split('@')[0];
-    setUser({ name, email });
-    navigate('/counter');
+    await setUser({ name, email });
+    navigate('/auth/counter');
   };
 
   const logout = () => {
@@ -31,7 +28,12 @@ const AuthProvider = ({ children }) => {
       logout
     }),
     [user]
-  );
-  return <AuthContext.Provider value={{ ...value }}>{children}</AuthContext.Provider>;
+  ); // memoize  these for the session
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-export default AuthProvider;
+export const AuthLayout = () => {
+  const outlet = useOutlet();
+
+  return <AuthProvider>{outlet}</AuthProvider>;
+}; // wraps all auth routes

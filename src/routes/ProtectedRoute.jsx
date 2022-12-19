@@ -1,14 +1,22 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useOutlet } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import { StyledButton, Box, FlexBox } from '../components/styledCompnents';
 
-const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth();
-  console.log(user);
+const ProtectedRoute = () => {
+  const { user, logout } = useAuth();
 
-  if (!user) {
-    // user is not authenticated
-    return <Navigate to="/" />;
-  }
-  return children;
+  const outlet = useOutlet();
+
+  return !user?.name ? (
+    <Navigate to="/" />
+  ) : (
+    <Box>
+      <FlexBox>
+        {' '}
+        <StyledButton onClick={logout}>Logout</StyledButton>
+        {outlet}
+      </FlexBox>
+    </Box>
+  );
 };
 export default ProtectedRoute;

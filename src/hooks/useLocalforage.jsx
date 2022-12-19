@@ -1,27 +1,31 @@
-import localforage from 'localforage';
 import { useState } from 'react';
+
 const useLocalforage = (keyName, defaultValue) => {
-  const [storedValue, setStoredValue] = useState(() => {
+  const setItem = (newValue) => {
     try {
-      const value = localforage.getItem(keyName);
-      if (value) {
-        return value;
-      } else {
-        localforage.setItem(keyName, defaultValue);
-        return defaultValue;
-      }
-    } catch (err) {
-      return defaultValue;
-    }
-  });
-  const setValue = (newValue) => {
-    try {
-      localforage.setItem(keyName, newValue);
+      localStorage.setItem(keyName, JSON.stringify(newValue));
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const defaultState = () => {
+    const value = JSON.parse(localStorage.getItem(keyName));
+    if (value) {
+      return value;
+    } else {
+      setItem(defaultValue);
+      return defaultValue;
+    }
+  };
+  const [storedValue, setStoredValue] = useState(defaultState());
+
+  const setValue = (newValue) => {
+    setItem(newValue);
     setStoredValue(newValue);
   };
+  // console.log({ storedValue: localforage.getItem(keyName) });
+
   return [storedValue, setValue];
 };
 export default useLocalforage;
