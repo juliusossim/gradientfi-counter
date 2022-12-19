@@ -1,27 +1,47 @@
 import useLogin from '../hooks/useLogin';
-import { Box, StyledButton, StyledForm, StyledHeader, StyledInput } from './styledCompnents';
+import {
+  FlexBox,
+  StyledButton,
+  StyledForm,
+  StyledHeader,
+  StyledInput,
+  StyledLayout
+} from './styledCompnents';
 
 const LoginForm = () => {
   const { login, errors, validateEmail } = useLogin();
   return (
-    <Box>
+    <StyledLayout>
       <StyledHeader>Login</StyledHeader>
       <StyledForm onSubmit={login}>
-        <StyledInput
-          onChange={validateEmail}
-          name="email"
-          placeholder="Email"
-          required
-          type="email"
-          width="24vw"
-          errors={errors}
-        />
-        <StyledInput width="24vw" name="password" placeholder="Password" required type="password" />
-        <StyledButton width="25vw" type="submit" errors={errors}>
-          Login
-        </StyledButton>
+        <FlexBox>
+          <StyledInput
+            onChange={validateEmail}
+            name="email"
+            placeholder="Email"
+            required
+            type="email"
+            width="24vw"
+            errors={errors}
+          />
+        </FlexBox>
+        <FlexBox>
+          <StyledInput
+            width="24vw"
+            name="password"
+            placeholder="Password"
+            required
+            type="password"
+          />
+        </FlexBox>
+        <FlexBox>
+          {' '}
+          <StyledButton width="25vw" type="submit" errors={errors}>
+            Login
+          </StyledButton>
+        </FlexBox>
       </StyledForm>
-    </Box>
+    </StyledLayout>
   );
 };
 export default LoginForm;
