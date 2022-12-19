@@ -35,11 +35,9 @@ const Counter = () => {
             width="25vw"
             placeholder="enter amount to operate"
           />
-          {val > 1 && (
-            <StyledButton type="reset" onClick={clear}>
-              Clear
-            </StyledButton>
-          )}
+          <StyledButton type="reset" onClick={clear}>
+            Clear
+          </StyledButton>
         </FlexBox>
         <FlexBox>
           {' '}
