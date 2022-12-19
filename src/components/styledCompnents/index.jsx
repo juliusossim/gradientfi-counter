@@ -32,7 +32,12 @@ export const Box = styled.div`
 `;
 export const StyledLayout = styled(Box)`
   width: 50vw;
-  display: block;
+  justify-content: center;
+  display: solid;
+  @media ${device.tablet} {
+    display: flex;
+    flex-direction: column;
+  }
   padding: ${(props) => `${props.theme.gap.normal} ${props.theme.gap.large}`};
   border: solid 1px;
 `;

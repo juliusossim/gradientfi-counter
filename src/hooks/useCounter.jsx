@@ -10,6 +10,6 @@ const useCounter = () => {
   const decreaseCount = () => setCount((prev) => (!isNaN(val) ? prev - val : prev - 1)); // decrease
   const clear = () => setVal(1); // resets val
 
-  return { paraCap, decreaseCount, increaseCount, count, setVal, user, clear }; // expose
+  return { paraCap, decreaseCount, increaseCount, count, setVal, user, clear, val }; // expose
 };
 export default useCounter;

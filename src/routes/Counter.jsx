@@ -12,7 +12,7 @@ import {
 import useCounter from '../hooks/useCounter';
 
 const Counter = () => {
-  const { paraCap, decreaseCount, increaseCount, count, setVal, clear, user } = useCounter(); // custom hook
+  const { paraCap, decreaseCount, increaseCount, count, setVal, clear, user, val } = useCounter(); // custom hook
 
   return (
     <StyledLayout>
@@ -35,9 +35,11 @@ const Counter = () => {
             width="25vw"
             placeholder="enter amount to operate"
           />
-          <StyledButton type="reset" onClick={clear}>
-            Clear
-          </StyledButton>
+          {val > 1 && (
+            <StyledButton type="reset" onClick={clear}>
+              Clear
+            </StyledButton>
+          )}
         </FlexBox>
         <FlexBox>
           {' '}
