@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import { AuthLayout } from '../contexts/AuthProvider';
-import ProtectedRoute from './ProtectedRoute';
+const ProtectedRoute = lazy(() => import('./ProtectedRoute')) ;
 const Login = lazy(() => import('./Login'));
 const Counter = lazy(() => import('./Counter'));
 
